@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Urban Development - Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-city"></i>
+                <span>Smart Urban</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" data-feature="traffic" class="nav-link active"><i class="fas fa-traffic-light"></i> Traffic Management</a></li>
+                <li><a href="#" data-feature="parking" class="nav-link"><i class="fas fa-parking"></i> Parking System</a></li>
+                <li><a href="#" data-feature="waste" class="nav-link"><i class="fas fa-recycle"></i> Waste Management</a></li>
+                <li><a href="#" data-feature="energy" class="nav-link"><i class="fas fa-bolt"></i> Energy Monitoring</a></li>
+                <li><a href="#" data-feature="pollution" class="nav-link"><i class="fas fa-wind"></i> Pollution Monitoring</a></li>
+                <li><a href="#" data-feature="emergency" class="nav-link"><i class="fas fa-ambulance"></i> Emergency Response</a></li>
+            </ul>
+            <div class="nav-user">
+                <span class="user-name"><i class="fas fa-user-shield"></i> Admin</span>
+                <button class="btn btn-sm btn-danger" onclick="logout()" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1 id="feature-title">Smart City Traffic Management</h1>
+            <p id="feature-description">Monitor and manage real-time traffic data, congestion, and accidents from IoT sensors, CCTV cameras, and GPS systems</p>
+        </div>
+
+        <!-- Feature Sections -->
+        <div id="feature-sections">
+            <!-- Traffic Management Section -->
+            <section id="traffic-section" class="feature-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-traffic-light"></i> Traffic Data Management</h2>
+                    <button class="btn btn-primary" onclick="openModal('traffic')">
+                        <i class="fas fa-plus"></i> Record Traffic Data
+                    </button>
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table" id="traffic-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>Vehicle Count</th>
+                                <th>Congestion</th>
+                                <th>Accident</th>
+                                <th>Route</th>
+                                <th>Timestamp</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="traffic-tbody">
+                            <!-- Data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Parking System Section -->
+            <section id="parking-section" class="feature-section">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchParkingTab('spots')">Parking Spots</button>
+                    <button class="tab-btn" onclick="switchParkingTab('reservations')">Reservations</button>
+                </div>
+                
+                <div id="parking-spots-tab" class="tab-content active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-parking"></i> Parking Spots Management</h2>
+                        <button class="btn btn-primary" onclick="openModal('parking-spot')">
+                            <i class="fas fa-plus"></i> Add Parking Spot
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="parking-spots-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Location</th>
+                                    <th>Spot Number</th>
+                                    <th>Zone</th>
+                                    <th>Type</th>
+                                    <th>Rate/Hour</th>
+                                    <th>Available</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parking-spots-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="parking-reservations-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-calendar-check"></i> Parking Reservations</h2>
+                        <button class="btn btn-primary" onclick="openModal('reservation')">
+                            <i class="fas fa-plus"></i> Create Reservation
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="reservations-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Spot</th>
+                                    <th>User</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reservations-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Waste Management Section -->
+            <section id="waste-section" class="feature-section">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchWasteTab('collection')">Waste Collections</button>
+                    <button class="tab-btn" onclick="switchWasteTab('types')">Waste Types</button>
+                    <button class="tab-btn" onclick="switchWasteTab('plants')">Recycling Plants</button>
+                    <button class="tab-btn" onclick="switchWasteTab('transport')">Transportation</button>
+                </div>
+                
+                <div id="waste-collection-tab" class="tab-content active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-trash-alt"></i> Waste Collection Management</h2>
+                        <button class="btn btn-primary" onclick="openModal('collection')">
+                            <i class="fas fa-plus"></i> Schedule Collection
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="collection-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Location</th>
+                                    <th>Waste Type</th>
+                                    <th>Fill Level</th>
+                                    <th>Status</th>
+                                    <th>Scheduled Date</th>
+                                    <th>Weight (kg)</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="collection-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="waste-types-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tags"></i> Waste Type Classification</h2>
+                        <button class="btn btn-primary" onclick="openModal('waste-type')">
+                            <i class="fas fa-plus"></i> Add Waste Type
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="waste-types-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type Name</th>
+                                    <th>Category</th>
+                                    <th>Recycling Rate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="waste-types-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="waste-plants-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-industry"></i> Recycling Plants Management</h2>
+                        <button class="btn btn-primary" onclick="openModal('plant')">
+                            <i class="fas fa-plus"></i> Register Plant
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="plants-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Plant Name</th>
+                                    <th>Location</th>
+                                    <th>Capacity (tons)</th>
+                                    <th>Status</th>
+                                    <th>Contact</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="plants-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="waste-transport-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-truck"></i> Waste Transportation Tracking</h2>
+                        <button class="btn btn-primary" onclick="openModal('transport')">
+                            <i class="fas fa-plus"></i> Record Transport
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="transport-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Collection</th>
+                                    <th>Vehicle ID</th>
+                                    <th>Driver</th>
+                                    <th>Status</th>
+                                    <th>Distance (km)</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transport-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Energy Monitoring Section -->
+            <section id="energy-section" class="feature-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bolt"></i> Energy Usage Monitoring</h2>
+                    <button class="btn btn-primary" onclick="openModal('energy')">
+                        <i class="fas fa-plus"></i> Record Energy Data
+                    </button>
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table" id="energy-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>Consumer Type</th>
+                                <th>Meter ID</th>
+                                <th>Energy (kWh)</th>
+                                <th>Water (L)</th>
+                                <th>Gas (m³)</th>
+                                <th>Cost (USD)</th>
+                                <th>Anomaly</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="energy-tbody">
+                            <!-- Data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Pollution Monitoring Section -->
+            <section id="pollution-section" class="feature-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-wind"></i> Air Quality & Pollution Monitoring (AI-Powered)</h2>
+                    <button class="btn btn-primary" onclick="openModal('pollution')">
+                        <i class="fas fa-plus"></i> Record Pollution Data
+                    </button>
+                </div>
+                <div class="ai-badge">
+                    <i class="fas fa-brain"></i> AI-Enabled: Analyzes PollutionData table to predict pollution levels and identify causes
+                </div>
+                <div class="data-table-container">
+                    <table class="data-table" id="pollution-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>PM2.5</th>
+                                <th>PM10</th>
+                                <th>CO₂ (ppm)</th>
+                                <th>AQI</th>
+                                <th>Status</th>
+                                <th>Alert</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pollution-tbody">
+                            <!-- Data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Emergency Response Section -->
+            <section id="emergency-section" class="feature-section">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchEmergencyTab('incidents')">Emergency Incidents</button>
+                    <button class="tab-btn" onclick="switchEmergencyTab('vehicles')">Emergency Vehicles</button>
+                    <button class="tab-btn" onclick="switchEmergencyTab('responses')">Response Times</button>
+                </div>
+                
+                <div id="emergency-incidents-tab" class="tab-content active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-exclamation-triangle"></i> Emergency Incident Management</h2>
+                        <button class="btn btn-primary" onclick="openModal('incident')">
+                            <i class="fas fa-plus"></i> Report Incident
+                        </button>
+                    </div>
+                    <div class="ai-badge">
+                        <i class="fas fa-brain"></i> AI-Enabled: Analyzes Incidents, EmergencyVehicles, and ResponseTimes tables to predict high-risk zones and optimize routes
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="incidents-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Severity</th>
+                                    <th>Status</th>
+                                    <th>Reported At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidents-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="emergency-vehicles-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-ambulance"></i> Emergency Vehicle Fleet</h2>
+                        <button class="btn btn-primary" onclick="openModal('vehicle')">
+                            <i class="fas fa-plus"></i> Register Vehicle
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="vehicles-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Number</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Assigned</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vehicles-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="emergency-responses-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-clock"></i> Response Time Analytics</h2>
+                        <button class="btn btn-primary" onclick="openModal('response')">
+                            <i class="fas fa-plus"></i> Record Response Time
+                        </button>
+                    </div>
+                    <div class="data-table-container">
+                        <table class="data-table" id="responses-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Incident</th>
+                                    <th>Vehicle</th>
+                                    <th>Dispatch</th>
+                                    <th>Arrival</th>
+                                    <th>Response Time</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="responses-tbody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal for Forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Form will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script>
+        // Check login status
+        if (sessionStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+        
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.removeItem('loggedIn');
+                sessionStorage.removeItem('username');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
+
