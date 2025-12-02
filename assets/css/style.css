@@ -1,33 +1,61 @@
 /* Smart Urban Development - Modern UI Styles */
 
+/* Dark Mode (Default) - Royal Blue Theme */
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
+    --primary-color: #4169E1;
+    --primary-dark: #1E3A8A;
+    --primary-light: #6B8CE8;
     --secondary-color: #10b981;
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
-    --dark-bg: #1e293b;
-    --darker-bg: #0f172a;
-    --card-bg: #1e293b;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-    --hover-bg: #334155;
+    --dark-bg: #1a1f3a;
+    --darker-bg: #0f1328;
+    --card-bg: #1e2547;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --border-color: #2d3a5c;
+    --hover-bg: #2d3a5c;
     --success-color: #10b981;
+    --royal-blue: #4169E1;
+    --royal-blue-dark: #1E3A8A;
+    --royal-blue-light: #6B8CE8;
+}
+
+/* Light Mode - Royal Blue Theme */
+[data-theme="light"] {
+    --primary-color: #4169E1;
+    --primary-dark: #1E3A8A;
+    --primary-light: #6B8CE8;
+    --secondary-color: #059669;
+    --danger-color: #dc2626;
+    --warning-color: #d97706;
+    --dark-bg: #f8fafc;
+    --darker-bg: #ffffff;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --hover-bg: #f1f5f9;
+    --success-color: #059669;
+    --royal-blue: #4169E1;
+    --royal-blue-dark: #1E3A8A;
+    --royal-blue-light: #6B8CE8;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
     color: var(--text-primary);
     min-height: 100vh;
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Navigation */
@@ -56,7 +84,7 @@ body {
     gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--royal-blue);
 }
 
 .nav-logo i {
@@ -74,7 +102,7 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -84,7 +112,7 @@ body {
 .nav-link:hover,
 .nav-link.active {
     background: var(--hover-bg);
-    color: var(--primary-color);
+    color: var(--royal-blue);
 }
 
 .nav-user {
@@ -94,11 +122,37 @@ body {
 }
 
 .user-name {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-weight: 500;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.theme-toggle:hover {
+    background: var(--hover-bg);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.theme-toggle i {
+    font-size: 1rem;
 }
 
 .nav-toggle {
@@ -118,9 +172,10 @@ body {
     margin-bottom: 2rem;
     text-align: center;
     padding: 2rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    background: linear-gradient(135deg, var(--royal-blue), var(--royal-blue-dark));
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 30px rgba(65, 105, 225, 0.3);
+    transition: all 0.3s ease;
 }
 
 .dashboard-header h1 {
@@ -136,8 +191,8 @@ body {
 
 /* AI Badge */
 .ai-badge {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.15), rgba(107, 140, 232, 0.15));
+    border: 1px solid rgba(65, 105, 225, 0.3);
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1.5rem;
@@ -147,19 +202,20 @@ body {
     gap: 0.75rem;
     font-size: 0.95rem;
     animation: pulse-glow 2s ease-in-out infinite;
+    transition: all 0.3s ease;
 }
 
 .ai-badge i {
-    color: #8b5cf6;
+    color: #6B8CE8;
     font-size: 1.2rem;
 }
 
 @keyframes pulse-glow {
     0%, 100% {
-        box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+        box-shadow: 0 0 10px rgba(65, 105, 225, 0.2);
     }
     50% {
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        box-shadow: 0 0 20px rgba(65, 105, 225, 0.4);
     }
 }
 
@@ -193,6 +249,7 @@ body {
     background: var(--card-bg);
     border-radius: 12px;
     border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 .section-header h2 {
@@ -201,6 +258,7 @@ body {
     gap: 0.75rem;
     font-size: 1.75rem;
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 /* Tabs */
@@ -259,14 +317,16 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--royal-blue), var(--royal-blue-dark));
     color: white;
+    border: none;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
+    background: linear-gradient(135deg, var(--royal-blue-light), var(--royal-blue));
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 4px 12px rgba(65, 105, 225, 0.4);
 }
 
 .btn-secondary {
@@ -290,7 +350,8 @@ body {
     border-radius: 12px;
     border: 1px solid var(--border-color);
     overflow-x: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .data-table {
@@ -312,12 +373,13 @@ body {
     text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: 0.5px;
+    background: var(--darker-bg);
 }
 
 .data-table td {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    color: var(--text-primary);
 }
 
 .data-table tbody tr {
@@ -345,21 +407,25 @@ body {
 .badge-success {
     background: rgba(16, 185, 129, 0.2);
     color: var(--success-color);
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .badge-warning {
     background: rgba(245, 158, 11, 0.2);
     color: var(--warning-color);
+    border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .badge-danger {
     background: rgba(239, 68, 68, 0.2);
     color: var(--danger-color);
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .badge-info {
-    background: rgba(37, 99, 235, 0.2);
-    color: var(--primary-color);
+    background: rgba(65, 105, 225, 0.2);
+    color: var(--royal-blue);
+    border: 1px solid rgba(65, 105, 225, 0.3);
 }
 
 /* Modal */
@@ -391,9 +457,19 @@ body {
     max-height: 90vh;
     overflow-y: auto;
     border: 1px solid var(--border-color);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;
     animation: slideUp 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.modal-content h2 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
 }
 
 @keyframes slideUp {
@@ -431,7 +507,8 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .form-group input,
@@ -439,8 +516,8 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem;
-    background: var(--darker-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-primary);
     font-size: 1rem;
@@ -451,8 +528,9 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--royal-blue);
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+    background: var(--darker-bg);
 }
 
 .form-group textarea {
@@ -490,7 +568,7 @@ body {
     width: 50px;
     height: 50px;
     border: 5px solid var(--border-color);
-    border-top-color: var(--primary-color);
+    border-top-color: var(--royal-blue);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }

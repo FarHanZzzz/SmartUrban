@@ -12,7 +12,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #2563eb 100%);
+            background: linear-gradient(135deg, #0f1328 0%, #1a1f3a 50%, #4169E1 100%);
             position: relative;
             overflow: hidden;
         }
@@ -32,14 +32,14 @@
         }
         
         .login-card {
-            background: rgba(30, 41, 59, 0.95);
+            background: rgba(30, 37, 71, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 3rem;
             width: 100%;
             max-width: 450px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            border: 1px solid rgba(65, 105, 225, 0.3);
             position: relative;
             z-index: 1;
             animation: slideUp 0.6s ease;
@@ -76,14 +76,15 @@
         .login-header h1 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            background: linear-gradient(135deg, #6B8CE8, #4169E1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 700;
         }
         
         .login-header p {
-            color: var(--text-secondary);
+            color: #cbd5e1;
             font-size: 1rem;
         }
         
@@ -98,7 +99,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            color: #f8fafc;
             font-weight: 500;
             font-size: 0.9rem;
         }
@@ -106,24 +107,29 @@
         .form-group input {
             width: 100%;
             padding: 1rem;
-            background: var(--darker-bg);
-            border: 2px solid var(--border-color);
+            background: rgba(15, 19, 40, 0.8);
+            border: 2px solid rgba(65, 105, 225, 0.3);
             border-radius: 10px;
-            color: var(--text-primary);
+            color: #f8fafc;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: #4169E1;
+            box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2);
+            background: rgba(15, 19, 40, 0.95);
+        }
+        
+        .form-group input::placeholder {
+            color: #94a3b8;
         }
         
         .login-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, #4169E1, #1E3A8A);
             border: none;
             border-radius: 10px;
             color: white;
@@ -140,7 +146,8 @@
         
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 10px 30px rgba(65, 105, 225, 0.4);
+            background: linear-gradient(135deg, #6B8CE8, #4169E1);
         }
         
         .login-btn:active {
@@ -148,9 +155,9 @@
         }
         
         .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
@@ -190,27 +197,29 @@
         .feature-icon {
             text-align: center;
             padding: 1rem;
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(65, 105, 225, 0.15);
             border-radius: 10px;
-            border: 1px solid rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(65, 105, 225, 0.3);
             transition: all 0.3s ease;
         }
         
         .feature-icon:hover {
-            background: rgba(37, 99, 235, 0.2);
+            background: rgba(65, 105, 225, 0.25);
             transform: translateY(-3px);
+            border-color: rgba(65, 105, 225, 0.5);
         }
         
         .feature-icon i {
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: #6B8CE8;
             margin-bottom: 0.5rem;
         }
         
         .feature-icon span {
             display: block;
             font-size: 0.75rem;
-            color: var(--text-secondary);
+            color: #cbd5e1;
+            font-weight: 500;
         }
     </style>
 </head>

@@ -24,6 +24,10 @@
                 <li><a href="#" data-feature="emergency" class="nav-link"><i class="fas fa-ambulance"></i> Emergency Response</a></li>
             </ul>
             <div class="nav-user">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                    <span id="theme-text">Dark</span>
+                </button>
                 <span class="user-name"><i class="fas fa-user-shield"></i> Admin</span>
                 <button class="btn btn-sm btn-danger" onclick="logout()" title="Logout">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -436,6 +440,49 @@
         if (sessionStorage.getItem('loggedIn') !== 'true') {
             window.location.href = 'index.html';
         }
+        
+        // Theme Toggle Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon and text
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (newTheme === 'light') {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            }
+        }
+        
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const html = document.documentElement;
+            html.setAttribute('data-theme', savedTheme);
+            
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'light') {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            }
+        }
+        
+        // Initialize theme on load
+        loadTheme();
         
         // Logout function
         function logout() {
